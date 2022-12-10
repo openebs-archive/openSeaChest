@@ -1,4 +1,4 @@
-FROM debian:buster as build
+FROM debian:bullseye as build
 RUN apt-get update && apt-get install -y make git gcc
 WORKDIR /tmp/openSeachest
 RUN git clone --recursive --branch Release-19.06.02 https://github.com/openebs/openSeaChest.git .
