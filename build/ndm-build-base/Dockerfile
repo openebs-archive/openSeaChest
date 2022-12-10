@@ -1,4 +1,4 @@
-FROM debian:buster as build
+FROM debian:bullseye as build
 RUN apt-get update && apt-get install -y make git gcc
 WORKDIR /tmp/openSeachest
 RUN git clone --recursive --branch Release-19.06.02 https://github.com/openebs/openSeaChest.git .
@@ -14,7 +14,7 @@ RUN cp opensea-common/Make/gcc/lib/libopensea-common.a /usr/lib && \
     cp -r opensea-operations/include /usr/local/include/openSeaChest/opensea-operations && \
     cp -r opensea-transport/include /usr/local/include/openSeaChest/opensea-transport
 
-FROM golang:1.14.7
+FROM golang:1.19.3
 RUN apt-get update && apt-get install -y make git libudev-dev libblkid-dev
 COPY --from=build /usr/lib/libopensea-* /usr/lib/
 COPY --from=build /usr/local/include /usr/local/include/
